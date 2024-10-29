@@ -1,0 +1,42 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} CI/CD Pipeline
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      # Build step
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'  # Specify the Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      # Test step
+      - name: Run tests
+        run: npm test
+
+      # Deploy step
+      - name: Deploy to Production
+        env:
+          DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}  # Use a secret for sensitive data
+        run: |
+          echo "🚀 Deploying to production..."
+          # Replace this with your deployment command
+          npm run deploy
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."
