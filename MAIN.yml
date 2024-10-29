@@ -1,6 +1,6 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} CI/CD Pipeline
-on: [push]
+on: [push] 
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
